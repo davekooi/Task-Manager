@@ -114,6 +114,7 @@
 				TargetAttributes = {
 					0A138D531EDE299C00EBE494 = {
 						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = 75YP4BMU64;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -286,6 +287,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 75YP4BMU64;
 				INFOPLIST_FILE = Project_Manager_Single_View_Start/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.94409640.Project-Manager-Single-View-Start";
@@ -298,6 +300,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 75YP4BMU64;
 				INFOPLIST_FILE = Project_Manager_Single_View_Start/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.94409640.Project-Manager-Single-View-Start";

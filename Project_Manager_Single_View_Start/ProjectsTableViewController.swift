@@ -149,7 +149,6 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
                     print("Could not save data: \(error.localizedDescription)")
                 }
             }
-            
         }))
         
         inputAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -202,17 +201,46 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+            projects.remove(at: indexPath.row)
+            
+            // delete item from core data
+            //Get all of the project items stored in the database
+            let projectRequest:NSFetchRequest<Project> = Project.fetchRequest()
+            
+            let result = try? managedObjectContext.fetch(projectRequest)
+            
+            var resultData = result!
+            
+            managedObjectContext.delete(resultData[indexPath.row])
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print("Unable to save projects after delete")
+            }
+            
+            // Here we can edit the loaded data
+            
+            do {
+                projects = try managedObjectContext.fetch(projectRequest)
+                self.tableView.reloadData()
+            } catch {
+                print("Unable to load data \(error.localizedDescription)")
+            }
+            
+        }
+        /*
+        else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }  
+         */
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.

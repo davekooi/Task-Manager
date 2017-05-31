@@ -27,11 +27,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="coffee" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-Oy-D6H">
-                                            <rect key="frame" x="-1" y="-1" width="375" height="147.5"/>
+                                            <rect key="frame" x="-1" y="-1" width="377" height="147.5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Jf-Xg-DOa">
-                                            <rect key="frame" x="-1" y="-1" width="375" height="147.5"/>
+                                            <rect key="frame" x="-1" y="-1" width="377" height="147.5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </imageView>
