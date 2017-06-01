@@ -21,8 +21,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        self.navigationItem.setHidesBackButton(true, animated:true)
         let iconImageView = UIImageView(image: UIImage(named: "logo"))
         self.navigationItem.titleView = iconImageView
         
@@ -99,11 +98,11 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // push the task view controller to a variable
-        let taskController = segue.destination as! ProjectTasksViewController
-        taskController.projectTitleFromMain = projects[selectedRow].title
+        let destNavigationController = segue.destination as! UINavigationController
+        let targetController = destNavigationController.topViewController as! ProjectTasksViewController
+        targetController.projectTitleFromMain = projects[selectedRow].title
     }
     
-
     @IBAction func addProject(_ sender: Any) {
         
         let imagePicker = UIImagePickerController()
