@@ -18,6 +18,8 @@
 		0A138D731EDE390C00EBE494 /* ProjectDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A138D721EDE390C00EBE494 /* ProjectDetailsTableViewCell.swift */; };
 		0A138D751EDE772700EBE494 /* jeff-sheldon-271733.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A138D741EDE772700EBE494 /* jeff-sheldon-271733.jpg */; };
 		0A5DB3D81EDF64BF001DB826 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5DB3D71EDF64BF001DB826 /* ToDo.rtf */; };
+		0A5DB3FB1EDFE361001DB826 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DB3FA1EDFE361001DB826 /* Section.swift */; };
+		0A5DB3FD1EDFE445001DB826 /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DB3FC1EDFE445001DB826 /* ExpandableHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		0A138D721EDE390C00EBE494 /* ProjectDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		0A138D741EDE772700EBE494 /* jeff-sheldon-271733.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jeff-sheldon-271733.jpg"; sourceTree = "<group>"; };
 		0A5DB3D71EDF64BF001DB826 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
+		0A5DB3FA1EDFE361001DB826 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		0A5DB3FC1EDFE445001DB826 /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		0A138D561EDE299C00EBE494 /* Project_Manager_Single_View_Start */ = {
 			isa = PBXGroup;
 			children = (
+				0A5DB3F91EDFE347001DB826 /* ExpandableHeaderView */,
 				0A138D571EDE299C00EBE494 /* AppDelegate.swift */,
 				0A138D6E1EDE353F00EBE494 /* ProjectsTableViewController.swift */,
 				0A138D721EDE390C00EBE494 /* ProjectDetailsTableViewCell.swift */,
@@ -80,6 +85,15 @@
 				0A5DB3D71EDF64BF001DB826 /* ToDo.rtf */,
 			);
 			path = Project_Manager_Single_View_Start;
+			sourceTree = "<group>";
+		};
+		0A5DB3F91EDFE347001DB826 /* ExpandableHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				0A5DB3FA1EDFE361001DB826 /* Section.swift */,
+				0A5DB3FC1EDFE445001DB826 /* ExpandableHeaderView.swift */,
+			);
+			name = ExpandableHeaderView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +173,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5DB3FB1EDFE361001DB826 /* Section.swift in Sources */,
+				0A5DB3FD1EDFE445001DB826 /* ExpandableHeaderView.swift in Sources */,
 				0A138D731EDE390C00EBE494 /* ProjectDetailsTableViewCell.swift in Sources */,
 				0A138D601EDE299C00EBE494 /* Project_Manager_Single_View_Start.xcdatamodeld in Sources */,
 				0A138D581EDE299C00EBE494 /* AppDelegate.swift in Sources */,

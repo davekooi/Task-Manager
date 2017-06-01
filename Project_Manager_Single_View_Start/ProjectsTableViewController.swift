@@ -9,9 +9,11 @@
 import UIKit
 import CoreData
 
-class ProjectsTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProjectsTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ExpandableHeaderViewDelegate {
     
     //var myProjects = [["title":"Build This Cool App", "image": "coffee", "detail":"Just For Fun"], ["title":"Organize Desk", "image": "desk", "detail":"To Simplify Life"]]
+    
+    var subTask = "Subtask"
     
     var projects = [Project]()
     
@@ -60,24 +62,54 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return projects.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return projects.count
+        
+        // Just start by adding one subtask to each section to start
+        return 1
     }
 
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 150
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Normally would check if bool expanded is true or false here
+        return 44
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ExpandableHeaderView()
+        header.customInit(title: projects[section].title!, section: section, delegate: self)
+        return header
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "subTaskCell")!
+        //cell.textLabel?.text = projects[indexPath.section].movies[indexPath.row]
+        cell.textLabel?.text = subTask
+        return cell
+    }
+    
+    func toggleSection(header: ExpandableHeaderView, section: Int) {
+        
+    }
+    
+    
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ProjectDetailsTableViewCell
 
         let projectObject = projects[indexPath.row]
-        
         
         if let projectImage = UIImage(data: projectObject.image! as Data) {
             cell.backgroundImageView.image = projectImage
@@ -88,7 +120,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
 
         return cell
     }
-    
+    */
 
     @IBAction func addProject(_ sender: Any) {
         
