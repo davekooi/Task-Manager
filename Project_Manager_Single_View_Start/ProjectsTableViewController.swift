@@ -15,6 +15,8 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
     
     var projects = [Project]()
     
+    var selectedRow: Int!
+    
     var managedObjectContext:NSManagedObjectContext!
 
     override func viewDidLoad() {
@@ -89,6 +91,18 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        selectedRow = indexPath.row
+        performSegue(withIdentifier: "toTasks", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // push the task view controller to a variable
+        let taskController = segue.destination as! ProjectTasksViewController
+        taskController.projectTitleFromMain = projects[selectedRow].title
+    }
+    
 
     @IBAction func addProject(_ sender: Any) {
         
@@ -113,10 +127,8 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
                 self.createProjectObject(with: image)
             })
         }
-        
-
     }
- 
+
  
     func createProjectObject (with image:UIImage) {
  

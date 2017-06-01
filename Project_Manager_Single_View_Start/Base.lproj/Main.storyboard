@@ -89,10 +89,31 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Ite-Bp-9vp" kind="show" identifier="toTasks" id="xOZ-a5-U3P"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Kf-6i-fD2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="941.60000000000002" y="41.829085457271368"/>
+        </scene>
+        <!--Project Tasks View Controller-->
+        <scene sceneID="qmj-EL-ntE">
+            <objects>
+                <viewController id="Ite-Bp-9vp" customClass="ProjectTasksViewController" customModule="Project_Manager_Single_View_Start" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vh6-bM-eBA"/>
+                        <viewControllerLayoutGuide type="bottom" id="cli-Df-UTJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S5r-Dq-hdq">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4bI-Fg-khS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1727" y="42"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pfh-dr-znB">

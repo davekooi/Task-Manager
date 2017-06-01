@@ -14,8 +14,6 @@ class ProjectDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var extraInfo: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,5 +24,4 @@ class ProjectDetailsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
