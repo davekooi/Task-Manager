@@ -105,7 +105,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
         let targetController = destNavigationController.topViewController as! ProjectTasksViewController
         targetController.projectTitleFromMain = projects[selectedRow].title
         targetController.imageBackgroundFromMain = UIImage(data: projects[selectedRow].image! as Data, scale: 1.0)
-        targetController.selectedRow = selectedRow
+        targetController.selectedTitle = projects[selectedRow].title
     }
     
     @IBAction func addProject(_ sender: Any) {
