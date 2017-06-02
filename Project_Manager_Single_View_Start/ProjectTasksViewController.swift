@@ -11,6 +11,8 @@ import CoreData
 
 class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var selectedRow: Int!
+    var selectedTasks = [Task]()
     
     @IBOutlet weak var viewWithSlider: UIView!
     @IBOutlet weak var imageBackground: UIImageView!
@@ -26,8 +28,6 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var managedObjectContext:NSManagedObjectContext!
-    
-    //var numbers = ["1", "2", "3"]
 
     var tasks = [Task]()
     
@@ -36,20 +36,24 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         loadData()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         self.title = projectTitleFromMain
         self.tableView.tableHeaderView = nil
         self.tableView.tableFooterView = nil
+        
         // hide unused cells
         tableView.tableFooterView = UIView()
         imageBackground.image = imageBackgroundFromMain
-        // viewWithSlider.backgroundColor = UIColor(white: 1, alpha: 0.9)
         viewWithSlider.backgroundColor = UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.9)
         
-        // Do any additional setup after loading the view.
+        for task in tasks {
+            if task.row == Int16(selectedRow) {
+                selectedTasks.append(task)
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,12 +68,12 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return selectedTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell")
-        cell?.textLabel?.text = tasks[indexPath.row].taskName
+        cell?.textLabel?.text = selectedTasks[indexPath.row].taskName
         cell?.textLabel?.textColor = UIColor.white
         cell?.selectionStyle = .none
         return cell!
@@ -98,9 +102,11 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
             
             if (taskTextField?.text != "") {
                 taskItem.taskName = taskTextField?.text
+                taskItem.row = Int16(self.selectedRow)
                 
                 do {
                     try self.managedObjectContext.save()
+                    self.selectedTasks.append(taskItem)
                     self.loadData()
                 } catch {
                     print("Could not save data: \(error.localizedDescription)")
@@ -129,12 +135,8 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
         } catch {
             print("Unable to load data \(error.localizedDescription)")
         }
-        
     }
-
-    
-    
-    
+ 
     /*
     // MARK: - Navigation
 
