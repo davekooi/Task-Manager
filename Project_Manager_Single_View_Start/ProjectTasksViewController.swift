@@ -13,9 +13,17 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     
     var selectedTitle: String!
     var selectedTasks = [Task]()
+    var projectProgress: Int16!
+    var selectedRowFromMain: Int!
     
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var viewWithSlider: UIView!
     @IBOutlet weak var imageBackground: UIImageView!
+    
+    @IBAction func sliderMoved(_ sender: Any) {
+        progressLabel.text = "Progress: \(Int(ceil(slider.value * 100)))%"
+    }
     
     @IBAction func backButton(_ sender: Any) {
         performSegue(withIdentifier: "backToMain", sender: self)
@@ -42,11 +50,15 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
         self.title = projectTitleFromMain
         self.tableView.tableHeaderView = nil
         self.tableView.tableFooterView = nil
-        
+        selectedTitle = projectTitleFromMain
         // hide unused cells
         tableView.tableFooterView = UIView()
         imageBackground.image = imageBackgroundFromMain
         viewWithSlider.backgroundColor = UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.9)
+        
+        // Progress label
+        slider.value = Float(projectProgress)/100.0
+        progressLabel.text = "Progress: \(Int(ceil(slider.value * 100)))%"
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +88,7 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
         return 0
     }
     
-    
+
     // MARK: - Functionality
     
     func createTaskObject () {
@@ -188,6 +200,15 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
  
+    
+    // MARK: - Segues
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // push the task view controller to a variable
+        let targetController = segue.destination as! ProjectsTableViewController
+        targetController.updatedProgress = (Int16(ceil(slider.value * 100)))
+    }
     
     
     

@@ -10,6 +10,7 @@ import UIKit
 
 class ProjectDetailsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var projectProgressLabel: UILabel!
     @IBOutlet weak var projectTitle: UILabel!
     @IBOutlet weak var extraInfo: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!

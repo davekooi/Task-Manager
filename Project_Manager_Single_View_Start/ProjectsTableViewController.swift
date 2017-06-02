@@ -9,32 +9,33 @@
 import UIKit
 import CoreData
 
+var selectedTitle: String?
+var selectedRow: Int?
+
 class ProjectsTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //var myProjects = [["title":"Build This Cool App", "image": "coffee", "detail":"Just For Fun"], ["title":"Organize Desk", "image": "desk", "detail":"To Simplify Life"]]
     
     var projects = [Project]()
     
-    var selectedRow: Int!
+    
+    
+    
+    var updatedProgress: Int16!
     
     var managedObjectContext:NSManagedObjectContext!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         self.navigationItem.setHidesBackButton(true, animated:true)
         let iconImageView = UIImageView(image: UIImage(named: "logo"))
         self.navigationItem.titleView = iconImageView
         tableView.tableFooterView = UIView()
         
-        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        updateProgress()
         
         loadData()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     func loadData() {
@@ -87,6 +88,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
  
         cell.projectTitle.text = projectObject.title
         cell.extraInfo.text = projectObject.details
+        cell.projectProgressLabel.text = "\(projectObject.progress)%"
         
         cell.selectionStyle = .none
 
@@ -94,8 +96,9 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        // print(indexPath.row)
         selectedRow = indexPath.row
+        selectedTitle = projects[indexPath.row].title
         performSegue(withIdentifier: "toTasks", sender: self)
     }
     
@@ -103,9 +106,11 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
         // push the task view controller to a variable
         let destNavigationController = segue.destination as! UINavigationController
         let targetController = destNavigationController.topViewController as! ProjectTasksViewController
-        targetController.projectTitleFromMain = projects[selectedRow].title
-        targetController.imageBackgroundFromMain = UIImage(data: projects[selectedRow].image! as Data, scale: 1.0)
-        targetController.selectedTitle = projects[selectedRow].title
+        targetController.projectTitleFromMain = projects[selectedRow!].title
+        targetController.imageBackgroundFromMain = UIImage(data: projects[selectedRow!].image! as Data, scale: 1.0)
+        targetController.selectedTitle = projects[selectedRow!].title
+        targetController.projectProgress = projects[selectedRow!].progress
+        targetController.selectedRowFromMain = selectedRow!
     }
     
     @IBAction func addProject(_ sender: Any) {
@@ -157,6 +162,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
             if (projectTextField?.text != "" && purposeTextField?.text != "") {
                 projectItem.title = projectTextField?.text
                 projectItem.details = purposeTextField?.text
+                projectItem.progress = 0
                 
                 do {
                     try self.managedObjectContext.save()
@@ -171,9 +177,41 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
         
         self.present(inputAlert, animated: true, completion: nil)
         
+        print("Progress: \(projectItem.progress)")
+        
     }
     
     
+    func updateProgress() {
+        print("UP FUNCTION:")
+        let projectRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Project")
+        
+        do{
+            let results = try managedObjectContext.fetch(projectRequest)
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    
+                    if let title = result.value(forKey: "title") as? String {
+                        if title == selectedTitle {
+                            result.setValue(updatedProgress, forKey: "progress")
+                            
+                            do {
+                                try managedObjectContext.save()
+                            } catch {
+                                
+                            }
+                        }
+                        print(title)
+                    }
+                    print(result.value(forKey: "progress")!)
+                }
+            }
+        } catch {
+            
+        }
+    }
     
     
     
