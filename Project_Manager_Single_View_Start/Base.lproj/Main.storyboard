@@ -109,9 +109,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="29" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sZe-ks-04H">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coffee" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-Bv-SqF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="29" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sZe-ks-04H">
+                                <rect key="frame" x="0.0" y="121" width="375" height="546"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" id="d2I-AN-R77">
                                         <rect key="frame" x="0.0" y="29" width="375" height="44"/>
@@ -128,13 +131,31 @@
                                     <outlet property="delegate" destination="Ite-Bp-9vp" id="fWa-NI-zMY"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggX-TL-VOp">
+                                <rect key="frame" x="0.0" y="64" width="375" height="57"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="AKd-5U-1PL">
+                                        <rect key="frame" x="6" y="13" width="363" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sZe-ks-04H" firstAttribute="top" secondItem="vh6-bM-eBA" secondAttribute="bottom" id="91a-oo-1D8"/>
-                            <constraint firstItem="sZe-ks-04H" firstAttribute="leading" secondItem="S5r-Dq-hdq" secondAttribute="leading" id="Ad3-jN-Voq"/>
-                            <constraint firstItem="sZe-ks-04H" firstAttribute="bottom" secondItem="cli-Df-UTJ" secondAttribute="top" id="Xhu-wf-BiU"/>
-                            <constraint firstAttribute="trailing" secondItem="sZe-ks-04H" secondAttribute="trailing" id="jRw-f9-clj"/>
+                            <constraint firstItem="gUa-Bv-SqF" firstAttribute="top" secondItem="S5r-Dq-hdq" secondAttribute="top" id="6Dw-pw-jtx"/>
+                            <constraint firstItem="gUa-Bv-SqF" firstAttribute="trailing" secondItem="sZe-ks-04H" secondAttribute="trailing" id="9lP-Xh-Y19"/>
+                            <constraint firstItem="sZe-ks-04H" firstAttribute="bottom" secondItem="cli-Df-UTJ" secondAttribute="top" id="A1P-hm-ypx"/>
+                            <constraint firstItem="ggX-TL-VOp" firstAttribute="trailing" secondItem="sZe-ks-04H" secondAttribute="trailing" id="K8k-KX-n79"/>
+                            <constraint firstItem="gUa-Bv-SqF" firstAttribute="bottom" secondItem="cli-Df-UTJ" secondAttribute="top" id="KDY-ps-hIl"/>
+                            <constraint firstItem="gUa-Bv-SqF" firstAttribute="leading" secondItem="sZe-ks-04H" secondAttribute="leading" id="S3h-pn-BXE"/>
+                            <constraint firstItem="gUa-Bv-SqF" firstAttribute="leading" secondItem="S5r-Dq-hdq" secondAttribute="leading" id="Zaf-tX-fzx"/>
+                            <constraint firstItem="ggX-TL-VOp" firstAttribute="leading" secondItem="sZe-ks-04H" secondAttribute="leading" id="daD-Ub-IWF"/>
+                            <constraint firstItem="sZe-ks-04H" firstAttribute="top" secondItem="vh6-bM-eBA" secondAttribute="bottom" constant="57" id="dtg-1T-xte"/>
+                            <constraint firstItem="sZe-ks-04H" firstAttribute="top" secondItem="ggX-TL-VOp" secondAttribute="bottom" id="h8R-Zt-06S"/>
+                            <constraint firstAttribute="trailing" secondItem="gUa-Bv-SqF" secondAttribute="trailing" id="nwl-e6-kOz"/>
+                            <constraint firstItem="ggX-TL-VOp" firstAttribute="top" secondItem="vh6-bM-eBA" secondAttribute="bottom" id="zv8-IN-cRD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GQt-pI-lpQ">
@@ -147,10 +168,15 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="w26-Np-LqA">
                             <color key="tintColor" red="0.92549019610000005" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="addTaskPressed:" destination="Ite-Bp-9vp" id="zfO-mi-ASs"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imageBackground" destination="gUa-Bv-SqF" id="5Rs-Kh-hXI"/>
                         <outlet property="tableView" destination="sZe-ks-04H" id="NtP-57-l63"/>
+                        <outlet property="viewWithSlider" destination="ggX-TL-VOp" id="czv-yf-Qjx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bI-Fg-khS" userLabel="First Responder" sceneMemberID="firstResponder"/>

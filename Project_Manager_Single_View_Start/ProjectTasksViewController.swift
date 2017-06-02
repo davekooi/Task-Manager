@@ -7,28 +7,47 @@
 //
 
 import UIKit
+import CoreData
 
 class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    @IBOutlet weak var viewWithSlider: UIView!
+    @IBOutlet weak var imageBackground: UIImageView!
     
     @IBAction func backButton(_ sender: Any) {
         performSegue(withIdentifier: "backToMain", sender: self)
     }
     
+    @IBAction func addTaskPressed(_ sender: Any) {
+        createTaskObject()
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     
-    var numbers = ["1", "2", "3"]
+    var managedObjectContext:NSManagedObjectContext!
+    
+    //var numbers = ["1", "2", "3"]
+
+    var tasks = [Task]()
     
     var projectTitleFromMain: String!
-    
+    var imageBackgroundFromMain: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        loadData()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         self.title = projectTitleFromMain
         self.tableView.tableHeaderView = nil
         self.tableView.tableFooterView = nil
-        
+        // hide unused cells
+        tableView.tableFooterView = UIView()
+        imageBackground.image = imageBackgroundFromMain
+        // viewWithSlider.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        viewWithSlider.backgroundColor = UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 0.9)
         
         // Do any additional setup after loading the view.
     }
@@ -45,13 +64,14 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numbers.count
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell")
-        cell?.textLabel?.text = numbers[indexPath.row]
+        cell?.textLabel?.text = tasks[indexPath.row].taskName
         cell?.textLabel?.textColor = UIColor.white
+        cell?.selectionStyle = .none
         return cell!
     }
     
@@ -60,7 +80,58 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
+    // MARK: - Functionality
     
+    func createTaskObject () {
+        
+        let taskItem = Task(context: managedObjectContext)
+        
+        let inputAlert = UIAlertController(title: "New Task", message: "Enter a task name", preferredStyle: .alert)
+        
+        inputAlert.addTextField { (textfield:UITextField) in
+            textfield.placeholder = "Task name"
+        }
+        
+        inputAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action:UIAlertAction) in
+            
+            let taskTextField = inputAlert.textFields?.first
+            
+            if (taskTextField?.text != "") {
+                taskItem.taskName = taskTextField?.text
+                
+                do {
+                    try self.managedObjectContext.save()
+                    self.loadData()
+                } catch {
+                    print("Could not save data: \(error.localizedDescription)")
+                }
+            }
+        }))
+        
+        inputAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(inputAlert, animated: true, completion: nil)
+        
+    }
+    
+    // MARK: - Core Data
+    
+    func loadData() {
+        //Get all of the project items stored in the database
+        let taskRequest:NSFetchRequest<Task> = Task.fetchRequest()
+        
+        // Here we can edit the loaded data
+        // i.e. projectRequest.sortDescriptors
+        
+        do {
+            tasks = try managedObjectContext.fetch(taskRequest)
+            self.tableView.reloadData()
+        } catch {
+            print("Unable to load data \(error.localizedDescription)")
+        }
+        
+    }
+
     
     
     

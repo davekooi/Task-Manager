@@ -24,6 +24,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
         self.navigationItem.setHidesBackButton(true, animated:true)
         let iconImageView = UIImageView(image: UIImage(named: "logo"))
         self.navigationItem.titleView = iconImageView
+        tableView.tableFooterView = UIView()
         
         managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
@@ -86,6 +87,8 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
  
         cell.projectTitle.text = projectObject.title
         cell.extraInfo.text = projectObject.details
+        
+        cell.selectionStyle = .none
 
         return cell
     }
@@ -101,6 +104,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
         let destNavigationController = segue.destination as! UINavigationController
         let targetController = destNavigationController.topViewController as! ProjectTasksViewController
         targetController.projectTitleFromMain = projects[selectedRow].title
+        targetController.imageBackgroundFromMain = UIImage(data: projects[selectedRow].image! as Data, scale: 1.0)
     }
     
     @IBAction func addProject(_ sender: Any) {
