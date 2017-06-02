@@ -22,7 +22,7 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var imageBackground: UIImageView!
     
     @IBAction func sliderMoved(_ sender: Any) {
-        progressLabel.text = "Progress: \(Int(ceil(slider.value * 100)))%"
+        progressLabel.text = "Progress: \(Int(slider.value * 100))%"
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -58,7 +58,7 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
         
         // Progress label
         slider.value = Float(projectProgress)/100.0
-        progressLabel.text = "Progress: \(Int(ceil(slider.value * 100)))%"
+        progressLabel.text = "Progress: \(Int(slider.value * 100))%"
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,7 +87,6 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
-    
 
     // MARK: - Functionality
     
@@ -207,7 +206,7 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // push the task view controller to a variable
         let targetController = segue.destination as! ProjectsTableViewController
-        targetController.updatedProgress = (Int16(ceil(slider.value * 100)))
+        targetController.updatedProgress = (Int16(slider.value * 100))
     }
     
     
