@@ -19,6 +19,7 @@
 		0A138D751EDE772700EBE494 /* jeff-sheldon-271733.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A138D741EDE772700EBE494 /* jeff-sheldon-271733.jpg */; };
 		0A5DB3D81EDF64BF001DB826 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5DB3D71EDF64BF001DB826 /* ToDo.rtf */; };
 		0A5DB4251EE0AB3A001DB826 /* ProjectTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DB4241EE0AB3A001DB826 /* ProjectTasksViewController.swift */; };
+		0A5DB4271EE21F1B001DB826 /* TaskNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DB4261EE21F1B001DB826 /* TaskNotesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		0A138D741EDE772700EBE494 /* jeff-sheldon-271733.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jeff-sheldon-271733.jpg"; sourceTree = "<group>"; };
 		0A5DB3D71EDF64BF001DB826 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		0A5DB4241EE0AB3A001DB826 /* ProjectTasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTasksViewController.swift; sourceTree = "<group>"; };
+		0A5DB4261EE21F1B001DB826 /* TaskNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNotesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				0A138D6E1EDE353F00EBE494 /* ProjectsTableViewController.swift */,
 				0A138D721EDE390C00EBE494 /* ProjectDetailsTableViewCell.swift */,
 				0A5DB4241EE0AB3A001DB826 /* ProjectTasksViewController.swift */,
+				0A5DB4261EE21F1B001DB826 /* TaskNotesViewController.swift */,
 				0A138D5B1EDE299C00EBE494 /* Main.storyboard */,
 				0A138D6C1EDE313400EBE494 /* coffee.jpg */,
 				0A138D741EDE772700EBE494 /* jeff-sheldon-271733.jpg */,
@@ -167,6 +170,7 @@
 				0A138D581EDE299C00EBE494 /* AppDelegate.swift in Sources */,
 				0A138D6F1EDE353F00EBE494 /* ProjectsTableViewController.swift in Sources */,
 				0A5DB4251EE0AB3A001DB826 /* ProjectTasksViewController.swift in Sources */,
+				0A5DB4271EE21F1B001DB826 /* TaskNotesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

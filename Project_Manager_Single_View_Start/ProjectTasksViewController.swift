@@ -11,10 +11,12 @@ import CoreData
 
 class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var selectedTitle: String!
+    var selectedTitle: String! //Project title
     var selectedTasks = [Task]()
     var projectProgress: Int16!
     var selectedRowFromMain: Int!
+    var selectedTask: Task! //Passing info to task notes
+    var updatedNotes: String!
     
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
@@ -90,6 +92,11 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
 
     // MARK: - Functionality
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedTask = tasks[indexPath.row]
+        performSegue(withIdentifier: "toTaskNotes", sender: self)
+    }
+    
     func createTaskObject () {
         
         let taskItem = Task(context: managedObjectContext)
@@ -107,6 +114,7 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
             if (taskTextField?.text != "") {
                 taskItem.taskName = taskTextField?.text
                 taskItem.selectedTitle = self.selectedTitle
+                taskItem.notes = ""
                 
                 do {
                     try self.managedObjectContext.save()
@@ -199,17 +207,19 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
  
-    
     // MARK: - Segues
-    
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // push the task view controller to a variable
-        let targetController = segue.destination as! ProjectsTableViewController
-        targetController.updatedProgress = (Int16(slider.value * 100))
+        if segue.identifier == "backToMain" {
+            // push the task view controller to a variable
+            let targetController = segue.destination as! ProjectsTableViewController
+            targetController.updatedProgress = (Int16(slider.value * 100))
+        }
+        else if segue.identifier == "toTaskNotes" {
+            let targetController = segue.destination as! TaskNotesViewController
+            targetController.selectedTask = selectedTask
+        }
     }
-    
-    
     
     /*
     // MARK: - Navigation

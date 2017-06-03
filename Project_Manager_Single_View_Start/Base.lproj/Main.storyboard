@@ -199,11 +199,50 @@
                         <outlet property="slider" destination="AKd-5U-1PL" id="kug-VR-OiA"/>
                         <outlet property="tableView" destination="sZe-ks-04H" id="NtP-57-l63"/>
                         <outlet property="viewWithSlider" destination="ggX-TL-VOp" id="czv-yf-Qjx"/>
+                        <segue destination="ydi-6f-DJl" kind="show" identifier="toTaskNotes" id="nip-9i-G06"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bI-Fg-khS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2488.8000000000002" y="41.829085457271368"/>
+        </scene>
+        <!--Task Notes View Controller-->
+        <scene sceneID="BIr-4H-eqE">
+            <objects>
+                <viewController id="ydi-6f-DJl" customClass="TaskNotesViewController" customModule="Project_Manager_Single_View_Start" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7HR-bl-usA"/>
+                        <viewControllerLayoutGuide type="bottom" id="xh5-QX-Rvj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cWM-7X-BRq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ao-kd-o4d">
+                                <rect key="frame" x="16" y="72" width="90" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3dF-0k-O3y">
+                                <rect key="frame" x="16" y="101" width="359" height="566"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="3dF-0k-O3y" id="L0A-gA-XIb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HKw-ue-fA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3269.5999999999999" y="41.829085457271368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pfh-dr-znB">
