@@ -258,6 +258,10 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
+            deleteProject(projectName: projects[indexPath.row].title!, row: indexPath.row)
+            
+            /*
             // Delete the row from the data source
             //tableView.deleteRows(at: [indexPath], with: .fade)
             projects.remove(at: indexPath.row)
@@ -286,6 +290,7 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
             } catch {
                 print("Unable to load data \(error.localizedDescription)")
             }
+ */
             
         }
         /*
@@ -295,7 +300,70 @@ class ProjectsTableViewController: UITableViewController, UIImagePickerControlle
          */
     }
     
+    
+    // Deletes the project and associated tasks from core data (and local projects array)
+    func deleteProject(projectName: String, row: Int){
+        // Remove corresponding tasks from core data
+        let taskRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+        
+        do {
+            let taskResults = try managedObjectContext.fetch(taskRequest) // tasks
+            
+            if taskResults.count > 0 {
+                for taskResult in taskResults as! [NSManagedObject] {
+                    if let taskOwner = taskResult.value(forKey: "selectedTitle") as? String{
+                        if taskOwner == projects[row].title {
+                            managedObjectContext.delete(taskResult)
+                        }
+                    }
+                }
+            }
+            
+        } catch {
+            print ("Error: unable to load tasks for delete in main projects VC")
+        }
+        
+        do {
+            try managedObjectContext.save()
+            print("Saved context - after delete tasks from deleting project")
+        } catch {
+            print("Error: could not save tasks with deleted tasks for deleted project")
+        }
 
+        
+        
+        // Remove project from core data
+        let projectRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Project")
+        
+        do {
+            let projectResults = try managedObjectContext.fetch(projectRequest) // projects
+            
+            if projectResults.count > 0 {
+                for projectResult in projectResults as! [NSManagedObject] {
+                    if let projectName = projectResult.value(forKey: "title") as? String{
+                        if projectName == projects[row].title {
+                            managedObjectContext.delete(projectResult)
+                        }
+                    }
+                }
+            }
+        } catch {
+            
+        }
+        
+        do {
+            try managedObjectContext.save()
+            print("Saved context - after delete project")
+        } catch {
+            print("Error: could not save project after delete project")
+        }
+        
+        // Remove project from local array
+        projects.remove(at: row)
+        
+        self.tableView.reloadData()
+    }
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

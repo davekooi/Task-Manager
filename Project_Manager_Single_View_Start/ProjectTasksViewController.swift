@@ -93,7 +93,7 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Functionality
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedTask = tasks[indexPath.row]
+        selectedTask = selectedTasks[indexPath.row]
         performSegue(withIdentifier: "toTaskNotes", sender: self)
     }
     
@@ -219,6 +219,21 @@ class ProjectTasksViewController: UIViewController, UITableViewDelegate, UITable
             let targetController = segue.destination as! TaskNotesViewController
             targetController.selectedTask = selectedTask
         }
+    }
+    
+    // MARK: - Helpers
+    
+    func findTaskIndex(task: Task) -> Int{
+        var counter = 0
+        for task in tasks {
+            if task.selectedTitle == selectedTask.selectedTitle && task.taskName == selectedTask.taskName {
+                // tasks.remove(at: counter)
+                // remove task from the result when fetching
+                break
+            }
+            counter += 1
+        }
+        return counter
     }
     
     /*
